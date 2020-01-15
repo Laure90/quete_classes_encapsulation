@@ -1,0 +1,83 @@
+using System;
+
+namespace quete_classe_jeuvideo
+{
+    class Program
+    {
+        public int PV { get; private set; }
+
+        static void Main(string[] args)
+        {
+            // fiche descriptive du perso1
+            Character perso1 = new Character();
+            perso1.PV = 100;
+            perso1.force = 50;
+            perso1.defence = 40;
+            perso1.name = "Chevalier";
+
+            // fiche descriptive du perso2
+            Character perso2 = new Character();
+            perso2.PV = 70;
+            perso2.force = 60;
+            perso2.defence = 80;
+            perso2.name = "Monstre";
+
+            while(perso2.IsAlive() && perso1.IsAlive())
+            {
+                perso1.Attack(perso2, perso1);
+                perso2.Attack(perso1, perso2);
+                Console.WriteLine("PV Chevalier " + perso1.PV + " , " + "PV Monstre " + perso2.PV);
+
+                
+            }
+
+            if (perso2.PV > 0)
+            {
+                Console.WriteLine("Monstre wins !");
+            }
+            else
+            {
+                Console.WriteLine("Chevalier wins !");
+            }
+
+
+        }
+        public class Character
+
+        {
+            public string name;
+            public int PV;
+            public int force;
+            public int defence;
+
+            public bool IsAlive()
+            {
+
+                if (PV > 0)
+                {
+                    return true;
+
+                }
+                else
+                {
+                    return false;
+                }
+
+
+            }
+
+            public int Attack(Character ennemy, Character fighter)
+            {
+                ennemy.PV = (ennemy.PV) - (Math.Abs(fighter.force - ennemy.defence));
+                return ennemy.PV;
+
+            }
+
+        }
+                    
+       
+
+
+        
+    }
+}
