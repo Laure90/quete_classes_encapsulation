@@ -1,0 +1,129 @@
+using System;
+
+namespace quete_biere
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            BeerEncapsulator Manufactory = new BeerEncapsulator();
+
+            Console.Write("Enter the avalaible beer volume : ");
+            Manufactory.AddBeer(Convert.ToDouble(Console.ReadLine()));
+
+            Console.Write("Enter the avalaible bottles : ");
+            Manufactory.SetAvalaibleBottles(Convert.ToInt32(Console.ReadLine()));
+
+            Console.Write("Enter the avalaible capsules : ");
+            Manufactory.SetAvalaibleCapsules(Convert.ToInt32(Console.ReadLine()));
+
+            Console.Write("How many bottle do you want ? ");
+            int bottlesMade = Manufactory.ProduceEncapsulatedBeerBottles(Convert.ToInt32(Console.ReadLine()));
+
+
+            Console.WriteLine("The number of bottles made is : ");
+            Console.Write(bottlesMade);            
+
+            
+
+        }
+
+        private class BeerEncapsulator
+        {
+
+            private  double _avalaibleBeerVolume;
+            private  int _avalaibleBottles;
+            private  int _avalaibleCapsules;
+
+
+            public double AddBeer(double VolumeBeerAdd)
+            {
+
+                _avalaibleBeerVolume = _avalaibleBeerVolume + VolumeBeerAdd;
+
+                return _avalaibleBeerVolume;
+
+            }
+
+            public  bool Inventory(int NumberBottlesToMake)
+            {
+                
+                // Quantité de composants qui manque
+                if (_avalaibleBottles < NumberBottlesToMake && NumberBottlesToMake > 0)
+                {
+                    
+                    Console.WriteLine("Miss bottles : " + (NumberBottlesToMake - _avalaibleBottles));
+                    
+                }
+
+                if (_avalaibleBeerVolume < NumberBottlesToMake* 33 && NumberBottlesToMake > 0)
+                {
+                    Console.WriteLine("Miss beer : " + ((NumberBottlesToMake*33) - _avalaibleBeerVolume));
+
+                }
+
+                if (_avalaibleCapsules < NumberBottlesToMake && NumberBottlesToMake > 0)
+                {
+                    Console.WriteLine("Miss capsules : " + (NumberBottlesToMake - _avalaibleCapsules));
+                   
+                }
+
+                while (_avalaibleBeerVolume >= 33 && _avalaibleBottles >= 1 && _avalaibleCapsules >= 1 && NumberBottlesToMake >= 1)
+                {
+                    _avalaibleBeerVolume = _avalaibleBeerVolume - 33;
+                    _avalaibleBottles = _avalaibleBottles - 1;
+                    _avalaibleCapsules = _avalaibleCapsules - 1;
+                    NumberBottlesToMake = NumberBottlesToMake - 1;
+                }
+                return false;
+                
+            }
+
+            public  int ProduceEncapsulatedBeerBottles(int bottleMade)
+            {
+                // si assez de composant renvoie le nombre de bouteilles fabriquées
+                if (!Inventory(bottleMade))
+                {
+                    return bottleMade;
+                }
+
+                // si pas assez de composants renvoie 0
+                else 
+                {
+                    return 0;
+                }
+
+
+            }
+            public double GetAvalaibleBeerVolum()
+            {
+                return _avalaibleBeerVolume;
+            }
+
+            public void SetAvalaibleBeerVolum(double avalaibleBeerVolume)
+            {
+                _avalaibleBeerVolume = avalaibleBeerVolume;
+            }
+
+            public int GetAvalaibleBottles()
+            {
+                return _avalaibleBottles;
+            }
+
+            public void SetAvalaibleBottles(int avalaibleBottles)
+            {
+                _avalaibleBottles = avalaibleBottles;
+            }
+
+            public double GetAvalaibleCapsules()
+            {
+                return _avalaibleCapsules;
+            }
+
+            public void SetAvalaibleCapsules(int avalaibleCapsules)
+            {
+                _avalaibleCapsules = avalaibleCapsules;
+            }
+        }
+    }
+}
