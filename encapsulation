@@ -68,13 +68,7 @@ namespace quete_biere
                    
                 }
 
-                while (_avalaibleBeerVolume >= 33 && _avalaibleBottles >= 1 && _avalaibleCapsules >= 1 && NumberBottlesToMake >= 1)
-                {
-                    _avalaibleBeerVolume = _avalaibleBeerVolume - 33;
-                    _avalaibleBottles = _avalaibleBottles - 1;
-                    _avalaibleCapsules = _avalaibleCapsules - 1;
-                    NumberBottlesToMake = NumberBottlesToMake - 1;
-                }
+                
                 return false;
                 
             }
@@ -84,6 +78,13 @@ namespace quete_biere
                 // si assez de composant renvoie le nombre de bouteilles fabriquées
                 if (!Inventory(bottleMade))
                 {
+                    while (_avalaibleBeerVolume >= 33 && _avalaibleBottles >= 1 && _avalaibleCapsules >= 1 && bottleMade >= 1)
+                    {
+                        _avalaibleBeerVolume = _avalaibleBeerVolume - 33;
+                        _avalaibleBottles = _avalaibleBottles - 1;
+                        _avalaibleCapsules = _avalaibleCapsules - 1;
+                        bottleMade = bottleMade - 1;
+                    }
                     return bottleMade;
                 }
 
