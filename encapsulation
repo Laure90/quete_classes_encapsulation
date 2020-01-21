@@ -78,7 +78,7 @@ namespace quete_biere
             public  int ProduceEncapsulatedBeerBottles(int bottleMade)
             {
                 // si assez de composant renvoie le nombre de bouteilles fabriquées
-                if (Inventory(bottleMade))
+                if (Inventory(bottleMade) == false)
                 {
                     return bottleMade;
                 }
@@ -123,3 +123,4 @@ namespace quete_biere
         }
     }
 }
+
