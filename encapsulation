@@ -49,19 +49,19 @@ namespace quete_biere
                 {
                     
                     Console.WriteLine("Miss bottles : " + (NumberBottlesToMake - _avalaibleBottles));
-                    
+                    return true;
                 }
 
                 if (_avalaibleBeerVolume < NumberBottlesToMake* 33 && NumberBottlesToMake > 0)
                 {
                     Console.WriteLine("Miss beer : " + ((NumberBottlesToMake*33) - _avalaibleBeerVolume));
-
+                    return true;
                 }
 
                 if (_avalaibleCapsules < NumberBottlesToMake && NumberBottlesToMake > 0)
                 {
                     Console.WriteLine("Miss capsules : " + (NumberBottlesToMake - _avalaibleCapsules));
-                   
+                    return true;
                 }
 
                 while (_avalaibleBeerVolume >= 33 && _avalaibleBottles >= 1 && _avalaibleCapsules >= 1 && NumberBottlesToMake >= 1)
