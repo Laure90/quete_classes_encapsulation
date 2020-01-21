@@ -20,12 +20,8 @@ namespace quete_biere
             Console.Write("How many bottle do you want ? ");
             int bottlesMade = Manufactory.ProduceEncapsulatedBeerBottles(Convert.ToInt32(Console.ReadLine()));
 
-
-            Console.WriteLine("The number of bottles made is : ");
-            Console.Write(bottlesMade);            
-
-            
-
+            Console.Write("The number of bottles made is : ");
+            Console.WriteLine(bottlesMade);
         }
 
         private class BeerEncapsulator
@@ -68,7 +64,13 @@ namespace quete_biere
                    
                 }
 
-                
+                while (_avalaibleBeerVolume >= 33 && _avalaibleBottles >= 1 && _avalaibleCapsules >= 1 && NumberBottlesToMake >= 1)
+                {
+                    _avalaibleBeerVolume = _avalaibleBeerVolume - 33;
+                    _avalaibleBottles = _avalaibleBottles - 1;
+                    _avalaibleCapsules = _avalaibleCapsules - 1;
+                    NumberBottlesToMake = NumberBottlesToMake - 1;
+                }
                 return false;
                 
             }
@@ -76,15 +78,8 @@ namespace quete_biere
             public  int ProduceEncapsulatedBeerBottles(int bottleMade)
             {
                 // si assez de composant renvoie le nombre de bouteilles fabriquées
-                if (!Inventory(bottleMade))
+                if (Inventory(bottleMade))
                 {
-                    while (_avalaibleBeerVolume >= 33 && _avalaibleBottles >= 1 && _avalaibleCapsules >= 1 && bottleMade >= 1)
-                    {
-                        _avalaibleBeerVolume = _avalaibleBeerVolume - 33;
-                        _avalaibleBottles = _avalaibleBottles - 1;
-                        _avalaibleCapsules = _avalaibleCapsules - 1;
-                        bottleMade = bottleMade - 1;
-                    }
                     return bottleMade;
                 }
 
